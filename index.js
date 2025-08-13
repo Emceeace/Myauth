@@ -40,6 +40,11 @@ function checkAdmin(req, res) {
 
 // === API ENDPOINTS ===
 
+// Root route
+app.get("/", (req, res) => {
+    res.send("KeyAuth clone server is running!");
+});
+
 // Generate a new license key
 app.post("/generate-key", (req, res) => {
     if (!checkAdmin(req, res)) return;
@@ -72,7 +77,7 @@ app.post("/unban-key", (req, res) => {
 });
 
 // Delete a key
-app.post("/delete-key", (req, res) => {
+app.post("/remove-key", (req, res) => {
     if (!checkAdmin(req, res)) return;
     const { key } = req.body;
     db.keys = db.keys.filter(k => k.key !== key);
